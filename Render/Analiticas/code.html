@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Task Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed h-full z-50">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">TaskMaster Pro</h1>
+<p class="text-slate-500 text-xs font-normal">Analytics Dashboard</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-sm font-medium">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="text-sm font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Dashboard Overview</h2>
+<div class="hidden md:flex items-center border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 gap-2 bg-slate-50 dark:bg-slate-800">
+<span class="material-symbols-outlined text-sm text-slate-400">calendar_today</span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300 tracking-tight">Last 30 Days</span>
+<span class="material-symbols-outlined text-sm text-slate-400">keyboard_arrow_down</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 dark:border-slate-700"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold leading-none">Alex Rivera</p>
+<p class="text-xs text-slate-500">Project Lead</p>
+</div>
+<img alt="User Profile" class="size-9 rounded-full bg-slate-100" data-alt="Portrait of Alex Rivera, professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8iB9TQ-qv1Q2ygqgwobgHtoHqOwrDAt4MH6oJ2kNVb8pgRRDwbLJQ4NJ4-6e8xXN_40bIm1k5U47MOzFdxxVGkdtZx1SeJT67TtgaPhtlYyfa7OOTgRIH3UwFfa1YnVfFDKHlsumgO6YzyOmVmzm0lilBeiteiTEuVPzrJkot0HbQlREMm-QA_ZY5YJid5WmOEDC-csjFIgI2QqqUPCSTbxdnfd_DEI0A7fKUsWu-Eahd9qndNtVJzrYVRY2yrXDYTDG6_0Qsr1nu"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8">
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Total Tasks</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">assignment</span>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white">1,284</h3>
+<span class="text-emerald-500 text-sm font-bold flex items-center mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            12.5%
+                        </span>
+</div>
+<p class="text-xs text-slate-400 mt-2">vs last month 1,141</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Completion Rate</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">check_circle</span>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white">84%</h3>
+<span class="text-emerald-500 text-sm font-bold flex items-center mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            4.2%
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mt-4">
+<div class="bg-primary h-full rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Avg. Cycle Time</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">timer</span>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white">3.2d</h3>
+<span class="text-red-500 text-sm font-bold flex items-center mb-1">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+                            0.5d
+                        </span>
+</div>
+<p class="text-xs text-slate-400 mt-2">Increased from 2.7d</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Active Sprints</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">rocket_launch</span>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white">04</h3>
+<span class="text-slate-400 text-sm font-medium mb-1">current</span>
+</div>
+<p class="text-xs text-slate-400 mt-2">122 tasks currently in sprint</p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Team Performance Bar Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Team Performance</h4>
+<p class="text-sm text-slate-500">Tasks completed per member</p>
+</div>
+<button class="text-sm text-primary font-semibold hover:underline">View Details</button>
+</div>
+<div class="flex items-end justify-between h-64 px-4 gap-4">
+<div class="flex-1 flex flex-col items-center gap-3 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative flex flex-col justify-end" style="height: 80%">
+<div class="bg-primary w-full h-full rounded-t-lg transition-all group-hover:bg-primary/80"></div>
+</div>
+<img alt="Sarah" class="size-8 rounded-full border-2 border-white shadow-sm" data-alt="Team member Sarah's avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBetiy_TgsY7AakaqYxHB_PPkBUW5YLnKIuUuPl2wYjZzXEK_CxhzJmij9CpyhobgLIHmQFrTvilhBd3gY-rXbjUd_BB1YnZx6QQ8vzvlqjcbCFEWhSGd1iCAkdnnf0yzTHtrFBVSKttTkRkeNj1TQyBNGv8SpvwYvq2u2e7dX3Xt0ZZehjxDsgCypUOOEtT5Vg8JoO9mGHOy0z00BNeqOxUkOs9a8vIzP_Dbe7lbGwMVcP7_7tYMaHU9lEshZbHIs77QLBNZCafVBd"/>
+<p class="text-xs font-medium text-slate-500">Sarah</p>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative flex flex-col justify-end" style="height: 65%">
+<div class="bg-primary w-full h-full rounded-t-lg transition-all group-hover:bg-primary/80"></div>
+</div>
+<img alt="John" class="size-8 rounded-full border-2 border-white shadow-sm" data-alt="Team member John's avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjog8b2EIn7Icpwnbkgsf3XHjhoGyDvLAsq9PSoLnhdwbVpJsF_2K2RsrXoeIHHcdOfdqpPHhGwbbifP4BPLb2a8Pjcmns8hSFhFvKXc-eeNkcw59fbrl__TEgRLd64F5QDh7JlFZWNoZMloKfgRHl3cqLrVECF8sv3zIiuuq8O_Jo1Ngss0JaVlnxROeDF1t0nryR0uuVQS58a8stsHYnxxvSdcpOnDuhqYJ9OMTH1CLh9p2oK6loSvrYlwq3wC09uWlon3jHK0rG"/>
+<p class="text-xs font-medium text-slate-500">John</p>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative flex flex-col justify-end" style="height: 95%">
+<div class="bg-primary w-full h-full rounded-t-lg transition-all group-hover:bg-primary/80"></div>
+</div>
+<img alt="Elena" class="size-8 rounded-full border-2 border-white shadow-sm" data-alt="Team member Elena's avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOejjBOl7bM6WYRZRntr-JZj1KvbJXVdNwHRATBdRV-o1lB3-XVL4PjJastB6KeaYKLZG_uOytuzHotuHb7eAe62G0Af2A5PNb2F_BJE251AhiBsnVf4TKoqmJw8V15JmMZWJsRxZl4htyRyeTKPrABatsircY99dhJOeug6G2mog0eGA6fgves_NHtsQwgSdHUQ918w1K_zB9qaEbqrdL9MlVSacw1quMdPmUO6QgrsARKJxUYj0dUjhigejWE_ui4ZZPn_Ml6OBj"/>
+<p class="text-xs font-medium text-slate-500">Elena</p>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative flex flex-col justify-end" style="height: 40%">
+<div class="bg-primary w-full h-full rounded-t-lg transition-all group-hover:bg-primary/80"></div>
+</div>
+<img alt="Marcus" class="size-8 rounded-full border-2 border-white shadow-sm" data-alt="Team member Marcus's avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtdXOhdcAPjn3RhkySSl3wbNsJnLA_LvXpR2Udt_QP6DR7egpJvgU0VIexhDGRXUvpsvGFRg_caoR6M3T42fPmUbu9kDCcKSWvS8n7LW2P-qgyt1WWjnAJpayII8XwypPXFl7_qCawLUZBUFLqIpBMmOKtSVDX0aKXdAdkDQ9XBaQR6_w3wTcadqtx7VghMZ6MrN52IOPx5lEn8n-xlWnpd47QNnC14jpyd5DbKGWCmagKUGdAz_F_fTfdhnY9M_mJQ0wQnkuQagKP"/>
+<p class="text-xs font-medium text-slate-500">Marcus</p>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative flex flex-col justify-end" style="height: 75%">
+<div class="bg-primary w-full h-full rounded-t-lg transition-all group-hover:bg-primary/80"></div>
+</div>
+<img alt="Lisa" class="size-8 rounded-full border-2 border-white shadow-sm" data-alt="Team member Lisa's avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADL3mUeTZagNX43PSf_SnWx9O65BPlZxFY4jGO2afcA3ZOBDJWWIQzVvC6K4bJY8rh6NiSiMe5ODVfBOqcHaZwaN95jxy0tjOFLkB3BI9uenA7jx3Aslq7Vau-ZHju01XdpE8MC_Se2kzt3i5Xe5GSUUJGtTwgCX9k3HCjLGLA9KeOg1LAqWXfNtCCSwQISDFcCOIUDxfBO_E2J_nXsm-D1_VsnRT935adPe-gj5AQ6VSdUeXsVYSYt3G61zEUkaWUdJq25EQ10JRz"/>
+<p class="text-xs font-medium text-slate-500">Lisa</p>
+</div>
+</div>
+</div>
+<!-- Tasks by Status Doughnut Chart -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<h4 class="text-base font-bold text-slate-900 dark:text-white mb-6">Tasks by Status</h4>
+<div class="flex-1 flex flex-col items-center justify-center relative">
+<!-- Custom CSS Doughnut using SVG -->
+<div class="size-48 relative">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-slate-100 dark:text-slate-800" cx="50%" cy="50%" fill="transparent" r="40%" stroke="currentColor" stroke-width="24"></circle>
+<circle class="text-primary" cx="50%" cy="50%" fill="transparent" r="40%" stroke="currentColor" stroke-dasharray="251" stroke-dashoffset="50" stroke-width="24"></circle>
+<circle class="text-primary/60" cx="50%" cy="50%" fill="transparent" r="40%" stroke="currentColor" stroke-dasharray="251" stroke-dashoffset="180" stroke-width="24"></circle>
+<circle class="text-primary/30" cx="50%" cy="50%" fill="transparent" r="40%" stroke="currentColor" stroke-dasharray="251" stroke-dashoffset="230" stroke-width="24"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<p class="text-2xl font-bold text-slate-900 dark:text-white">1,284</p>
+<p class="text-xs text-slate-500 font-medium">Total</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-6">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Done (65%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary/60"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">In Progress (20%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary/30"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Review (10%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-slate-200 dark:bg-slate-700"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Todo (5%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h4 class="text-base font-bold text-slate-900 dark:text-white">Recent Activity</h4>
+<button class="text-sm font-medium text-primary bg-primary/5 px-3 py-1 rounded-lg">View All</button>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Activity Item 1 -->
+<div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<img alt="User" class="size-10 rounded-full bg-slate-100" data-alt="User avatar for John" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5WVg7Zv221E3DuuWrY3rbsResx0C_3Q1LGnwk5GPhknjhe10MdcDFji3_YR0PEO2BZP6jAsycYfSFt_DAYomWRYxaEVxIfc0tAW055shGPaN_fYBleYZywKRgKPRskkVjBLNeHyBX3qjTVhBCv2SE3wDiMsh1wMlEc3ojV2YX_zCsl4rAkLzMnA4VAYsN9X4AIYC7k_BB8raVmHO3b7YQgyXAyCLcxG8alK361w2DMHLLCsa1DUZ1ot1-HJ5iEiWUPEBKLCHTuTJl"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm text-slate-900 dark:text-slate-100 font-medium truncate">
+<span class="font-bold">John Doe</span> moved <span class="font-semibold text-primary">"API Integration v2"</span> to <span class="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-md text-xs font-bold">DONE</span>
+</p>
+<p class="text-xs text-slate-500 mt-1">2 hours ago • Project: Phoenix Core</p>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<img alt="User" class="size-10 rounded-full bg-slate-100" data-alt="User avatar for Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPsh-yZXNbQZ5bhSYOg3dgPVTuQhCELcOh-v_YT_J3GaYiwmjVqAemcYKtd4Mum6qgOl1EFK9c9BdXio53PMObZHENThbbxVC7YkV6YI2oSjM9FZ7UMu7ixU755b4iNldp5lgjBMpvONwYVkGOm4mONBBVOgNKnn4kKmh_JMFoppIbgP7sZELvxkBqp_7Pivf5hXyXcNtOydZDqenxlpg8zgbdZOJH0OxKjUhDMjnzSNYSTBZySEzJUojg1Iuw6B5OYdmt0LmnAXAP"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm text-slate-900 dark:text-slate-100 font-medium truncate">
+<span class="font-bold">Sarah Smith</span> added a comment on <span class="font-semibold text-primary">"Dashboard UI Review"</span>
+</p>
+<p class="text-xs text-slate-500 mt-1 italic">"The contrast on the status labels looks much better now, thanks!"</p>
+<p class="text-xs text-slate-500 mt-1">4 hours ago • Project: Analytics Design</p>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<img alt="User" class="size-10 rounded-full bg-slate-100" data-alt="User avatar for Elena" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD5vzjJcH1mrSw5uiR1C3izBoDpgcVV4GGhj32cb9YreelWP1AQJy0fkwfiG3VhwgFUn6MCuBm8dcP41wGUI_wpnjs5rThK3x9-om-Mi3OxUr3nPRbhpXgjbXJNFihX5VlPi8PktZQtmLcctnE1YdxqmDk7XG9huuy0Kkym0thDdlATWAYEgBKJyPmwOzypO94IMKE0tff2kHZjhL4pKyObwK_tzEFxgUwIBxqqxHwe_cRshW9tO1uWdhtnGt7mWYkUveO7SPgGFRT"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm text-slate-900 dark:text-slate-100 font-medium truncate">
+<span class="font-bold">Elena K.</span> assigned <span class="font-semibold text-primary">"Database Migration"</span> to <span class="font-bold text-slate-700 dark:text-slate-300">Marcus Wright</span>
+</p>
+<p class="text-xs text-slate-500 mt-1">6 hours ago • Project: Infra Update</p>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
