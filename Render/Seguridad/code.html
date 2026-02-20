@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-6 md:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-slate-900 dark:text-slate-100">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Security Center</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-bold text-primary" href="#">Security</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Activity</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Profile</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">
+<!-- Page Title -->
+<div class="mb-8">
+<h1 class="text-3xl font-black text-slate-900 dark:text-slate-100 tracking-tight mb-2">Security Settings</h1>
+<p class="text-slate-500 dark:text-slate-400">Manage your password, authentication methods, and monitor active sessions.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Forms and Toggles -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Password Change Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">lock</span>
+<h2 class="text-xl font-bold">Password Management</h2>
+</div>
+<form class="space-y-4 max-w-lg">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Current Password</label>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary block w-full p-2.5" placeholder="••••••••" type="password"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">New Password</label>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary block w-full p-2.5" placeholder="Minimum 12 chars" type="password"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Confirm Password</label>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary block w-full p-2.5" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="pt-2">
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-md shadow-primary/20" type="submit">
+                                Update Password
+                            </button>
+</div>
+</form>
+</section>
+<!-- 2FA Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">vibration</span>
+<h2 class="text-xl font-bold">Two-Factor Authentication</h2>
+</div>
+<span class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Enabled</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
+                        Add an extra layer of security to your account by requiring more than just a password to log in.
+                    </p>
+<div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<div class="size-10 flex items-center justify-center bg-white dark:bg-slate-700 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+</div>
+<div>
+<p class="font-bold text-sm">Authenticator App</p>
+<p class="text-xs text-slate-500">Google Authenticator, Authy, or 1Password</p>
+</div>
+</div>
+<button class="bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">Configure</button>
+</div>
+</section>
+<!-- Active Sessions -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">devices</span>
+<h2 class="text-xl font-bold">Active Sessions</h2>
+</div>
+<button class="text-rose-600 dark:text-rose-400 text-sm font-bold hover:underline">Log out from all devices</button>
+</div>
+<div class="space-y-4">
+<!-- Session 1 -->
+<div class="flex items-center justify-between p-4 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">desktop_windows</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-sm">Chrome on macOS</p>
+<span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase">Current</span>
+</div>
+<p class="text-xs text-slate-500">San Francisco, USA • 192.168.1.1</p>
+</div>
+</div>
+<span class="text-xs text-slate-400 font-medium">Active now</span>
+</div>
+<!-- Session 2 -->
+<div class="flex items-center justify-between p-4 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<div>
+<p class="font-bold text-sm">Safari on iPhone 13</p>
+<p class="text-xs text-slate-500">London, UK • 82.12.44.102</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs text-slate-400 font-medium italic">2 hours ago</span>
+<button class="text-slate-400 hover:text-rose-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Logs & Info -->
+<div class="space-y-8">
+<!-- Security Score Card -->
+<section class="bg-primary rounded-xl p-6 text-white shadow-lg shadow-primary/30">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-lg font-bold">Security Score</h3>
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div class="flex items-end gap-2 mb-4">
+<span class="text-4xl font-black">85</span>
+<span class="text-primary-100/70 font-medium pb-1">/ 100</span>
+</div>
+<div class="w-full bg-white/20 rounded-full h-2 mb-6">
+<div class="bg-white h-2 rounded-full" style="width: 85%"></div>
+</div>
+<p class="text-sm text-primary-50 mb-4 opacity-90">Your account is very secure. Enable hardware keys to reach 100%.</p>
+<button class="w-full bg-white text-primary font-bold py-2 rounded-lg text-sm hover:bg-slate-100 transition-colors">Boost Security</button>
+</section>
+<!-- Security Logs -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">history</span>
+<h2 class="text-lg font-bold">Security Logs</h2>
+</div>
+<div class="space-y-6">
+<!-- Log Entry -->
+<div class="relative pl-6 border-l-2 border-slate-100 dark:border-slate-800 pb-1">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-900"></div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">Login Successful</p>
+<p class="text-xs text-slate-500 mt-0.5">Oct 24, 2023 • 09:42 AM</p>
+<p class="text-[10px] text-slate-400 mt-1">IP: 192.168.1.1</p>
+</div>
+<!-- Log Entry -->
+<div class="relative pl-6 border-l-2 border-slate-100 dark:border-slate-800 pb-1">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-amber-500 border-4 border-white dark:border-slate-900"></div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">2FA Challenge</p>
+<p class="text-xs text-slate-500 mt-0.5">Oct 24, 2023 • 09:41 AM</p>
+<p class="text-[10px] text-slate-400 mt-1">IP: 192.168.1.1</p>
+</div>
+<!-- Log Entry -->
+<div class="relative pl-6 border-l-2 border-slate-100 dark:border-slate-800 pb-1">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-primary border-4 border-white dark:border-slate-900"></div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">Password Changed</p>
+<p class="text-xs text-slate-500 mt-0.5">Oct 20, 2023 • 11:15 PM</p>
+<p class="text-[10px] text-slate-400 mt-1">IP: 192.168.1.1</p>
+</div>
+<!-- Log Entry -->
+<div class="relative pl-6 border-l-2 border-slate-100 dark:border-slate-800">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-white dark:border-slate-900"></div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">Logged Out</p>
+<p class="text-xs text-slate-500 mt-0.5">Oct 19, 2023 • 04:30 PM</p>
+</div>
+</div>
+<button class="w-full mt-6 text-primary text-xs font-bold hover:underline">View full history</button>
+</section>
+<!-- Help & Documentation -->
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 border border-dashed border-slate-300 dark:border-slate-700">
+<p class="text-sm font-bold mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">help_center</span>
+                        Need help?
+                    </p>
+<p class="text-xs text-slate-500 leading-relaxed mb-3">Learn more about our security practices and how we protect your data.</p>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Visit Security Docs →</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-slate-200 dark:border-slate-800 mt-12 py-8 bg-white dark:bg-background-dark">
+<div class="max-w-[1200px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+<p>© 2023 Security Dashboard. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Compliance</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
