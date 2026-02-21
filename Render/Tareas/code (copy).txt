@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TaskFlow - Task List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            background-color: rgba(80, 72, 229, 0.1);
+            color: #5048e5;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-tight tracking-tight">TaskFlow</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Collaborative App</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-nav" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span class="text-sm font-semibold">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="text-sm font-semibold">My Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-semibold">Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-semibold">Reporting</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+<div class="mt-4 flex items-center gap-3 px-3 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="User profile avatar small" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl31zKYtFDQ7o2uNOPBEa9hH0IGzjBcVH550Irj83fXbLarK3wACRmos0__1Q0Fkord5oc5GmG5MFscRexhhjmxNk5a1kX_cW2RtJNqpMHAZf9Mx44rz8Wfx761qTv2-lVWlWwQkQGbPoFEP_Hq_z9uXUKVanESJbeI_nU9tE_S_5cUO0S_sjHcvd3459q4y8OoR5LLeCqaYI8flrodEUySnGytQUd4nRPiXylNASh4nBJlVITSMko3QFunJaj5Q6WCpwsxrX2nUEj')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Alex Morgan</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4">
+<nav class="flex items-center text-sm font-medium text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Project Alpha</a>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<span class="text-slate-900 dark:text-slate-100">Tasks</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50 transition-all outline-none" placeholder="Search tasks..." type="text"/>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">add</span>
+                    Add Task
+                </button>
+</div>
+</header>
+<!-- Tool Bar -->
+<div class="px-8 py-4 flex items-center justify-between bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 shrink-0">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                    Filter
+                </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">sort</span>
+                    Sort
+                </button>
+</div>
+<div class="flex items-center gap-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+<span>4 Tasks Selected</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Mark as Done">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">check_circle</span>
+</button>
+<button class="p-1.5 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Delete Tasks">
+<span class="material-symbols-outlined text-red-500">delete</span>
+</button>
+<button class="p-1.5 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Archive">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">archive</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Scrollable Table Area -->
+<div class="flex-1 overflow-auto px-8 py-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+<th class="py-4 px-4 w-12 border-b border-slate-200 dark:border-slate-800">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800">Task Name</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800">Assignee</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800">Due Date</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800">Priority</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800">Status</th>
+<th class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Design System Update</span>
+<p class="text-xs text-slate-500 mt-0.5">Refactoring component tokens</p>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-cover bg-center border border-white dark:border-slate-700 shadow-sm" data-alt="Jane Doe profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuZf0rkmyJxOG2O8W9jRjU7QGNA5c8fmg2vmqwti-pKXBD2nNz-SDCd917E1Ry4Z1qr-7E5ozj252Z4NZ95CrsZU4w3sHsVWzShSKzk1rrHbFJY-poLs1TYT-y-jMUaQOKZJzUp_XLeGvHYnhjVi0_18IyeUrpbih3shctrlORF-mkYoENefu6i_Wf8JbdY2m4myZuD0xuing9d5I_QNLFsAspvfBTIEpQRcr8uBu99GYLhlW7Zzms5dqP6ncHo8HrEVYFH9cH2B14')"></div>
+<span class="text-sm font-medium">Jane Doe</span>
+</div>
+</td>
+<td class="py-4 px-4 text-sm text-slate-600 dark:text-slate-400">Oct 24, 2023</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
+                                    High
+                                </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2 text-sm">
+<span class="size-2 rounded-full bg-amber-400"></span>
+<span class="font-medium">In Progress</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="py-4 px-4">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">API Integration</span>
+<p class="text-xs text-slate-500 mt-0.5">Stripe webhook handlers</p>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-cover bg-center border border-white dark:border-slate-700 shadow-sm" data-alt="Michael Chen profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6Jdh9sb-mAo4TzGEhJ0Er7I3S7uvXRP0utNjNnirTFZ-y0RsYbz-lOR3-K_hQBNpWDrvAZjPshY7xQXcCG9IATVGsU0YTCyJtyjQY_0pfUVcAlyV2jqLyX436YspvM4wcNgcH39RuZQc6Fi6vD8JO40ibxnfimrEkK0swbwEURVnq7oRUiIiCgKbDgIZ4Or2oElxy3lhPo-bA3h69-KZo09XmlrV0yk31iHhAQ35coLljDdTHFMLiziUKqlhpzuU8uJSWEZ8fksIE')"></div>
+<span class="text-sm font-medium">Michael Chen</span>
+</div>
+</td>
+<td class="py-4 px-4 text-sm text-slate-600 dark:text-slate-400">Oct 26, 2023</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                                    Medium
+                                </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2 text-sm">
+<span class="size-2 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+<span class="font-medium text-slate-500 dark:text-slate-400">Todo</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="py-4 px-4">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">User Testing Phase 1</span>
+<p class="text-xs text-slate-500 mt-0.5">Internal team feedback loop</p>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-cover bg-center border border-white dark:border-slate-700 shadow-sm" data-alt="Sarah Smith profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKk1sAC7qVygNAiHxCN4GCtvk5iCSQYeOK_uCCaZHbf_78KQpM_Ou2Qoa4mG9hrgPjtCZB6jIX6UmZ1wQAqHz9zu-Fk7AKgQ4CGRBKv42Z1VYm8lbOpNnF5VPdzyaJv6aaygNAQ0s0qKNQgmX2m1aHmXw1f4O9x-lKv-1atu1jiQybRQgBryKtirc37qInxMyL8NcF0SQXdA-WKuGRsRFzAk6P5QUZRHnQoZ1MxGSTfjNO5cPcVrFxgQH28KZU1VRG4ZA6o1OdBR2j')"></div>
+<span class="text-sm font-medium">Sarah Smith</span>
+</div>
+</td>
+<td class="py-4 px-4 text-sm text-slate-600 dark:text-slate-400">Oct 28, 2023</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
+                                    High
+                                </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2 text-sm">
+<span class="size-2 rounded-full bg-amber-400"></span>
+<span class="font-medium">In Progress</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="py-4 px-4">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Bug Fixes - Sprint 4</span>
+<p class="text-xs text-slate-500 mt-0.5">Navigation lag on mobile</p>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-cover bg-center border border-white dark:border-slate-700 shadow-sm" data-alt="Alex Morgan profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAB596wUbcLjV1-UyLqhMxoqTWVM0j8XUQbsEY1NM3KmVFmqtPqR_bX9NR5cOE6bcVFj4rwnHlKSTYzaPLRvl6HvGIm37wNBcta8uGlmTcDVipgNKVJEMn0KB4BPW0SRgiOuyvbHi-WVh_Qz3BdzbtUhiWJxZX1fcgAMDo1-_QTw7DqGPmIeCdqIkkquPktVgW095oCCtRviRDQHRUhJrNqWP0btviQmm3pgHPYeua4KC5es9ZJvzYrygcuP8EIsSZbKhfuKNqirlty')"></div>
+<span class="text-sm font-medium">Alex Morgan</span>
+</div>
+</td>
+<td class="py-4 px-4 text-sm text-slate-600 dark:text-slate-400">Oct 22, 2023</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
+                                    Low
+                                </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2 text-sm">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium text-emerald-600 dark:text-emerald-400">Done</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="py-4 px-4">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Marketing Assets</span>
+<p class="text-xs text-slate-500 mt-0.5">App Store screenshots</p>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded-full bg-cover bg-center border border-white dark:border-slate-700 shadow-sm" data-alt="Jane Doe profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6b_j256Z1L0C0zrIeoTIp6xF_eiBORmbAK7a3e3wBShazxJJs88hbPECzapddBQRalj3VcpOF9ybBj1jCeKj34l8qdyuhz3gRf8SSw42FhvMAL4-_l9OHyf16cTwGKe3kD9BpLP3B5Q9VDAJ8dnumFMKS6fPnqgeKyLFC3ilL7SR2vecGv17OMQC1OXACNcVxpAxwwhCGiXvb5ucOr2tzNgym43nMd2DPdlEgQ4NAJKRGCsc2jtAojDi6T6VIV7HBrFdj-IUvgTaP')"></div>
+<span class="text-sm font-medium">Jane Doe</span>
+</div>
+</td>
+<td class="py-4 px-4 text-sm text-slate-600 dark:text-slate-400">Nov 02, 2023</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                                    Medium
+                                </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2 text-sm">
+<span class="size-2 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+<span class="font-medium text-slate-500 dark:text-slate-400">Todo</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination or Status Info -->
+<div class="mt-6 flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+<p>Showing 5 of 24 tasks</p>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
