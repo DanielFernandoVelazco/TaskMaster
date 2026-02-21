@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing &amp; Plans | SaaS Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Top Navigation Bar -->
+<header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<svg class="w-8 h-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight">SaaS Pro</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-sm font-medium text-primary" href="#">Pricing</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Enterprise</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-sm font-bold px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Log In</button>
+<button class="bg-primary text-white text-sm font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">Get Started</button>
+</div>
+</div>
+</div>
+</header>
+<main class="py-12 md:py-20">
+<!-- Hero Section -->
+<div class="max-w-4xl mx-auto text-center px-4 mb-16">
+<h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6">Flexible plans for every team</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+                Simple, transparent pricing that scales with your business. Choose the plan that's right for your team's ambitions.
+            </p>
+<!-- Billing Toggle -->
+<div class="flex items-center justify-center gap-4">
+<span class="text-sm font-medium text-slate-500">Monthly</span>
+<button class="w-14 h-7 bg-primary/20 dark:bg-primary/40 rounded-full relative p-1 transition-colors group">
+<div class="w-5 h-5 bg-primary rounded-full absolute right-1 top-1"></div>
+</button>
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium">Yearly</span>
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Save 20%</span>
+</div>
+</div>
+</div>
+<!-- Pricing Cards Grid -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+<!-- Free Plan -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 flex flex-col hover:shadow-xl transition-shadow">
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-2">Free</h3>
+<p class="text-slate-500 text-sm mb-6">Perfect for small side projects or hobbyists.</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black">$0</span>
+<span class="text-slate-500 font-medium">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Up to 3 Projects
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Basic Analytics
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Community Support
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-400 line-through">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-xl">circle</span>
+                        Custom Branding
+                    </li>
+</ul>
+<button class="w-full py-3 px-4 rounded-lg font-bold text-sm bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Start for Free</button>
+</div>
+<!-- Pro Plan (Highlighed) -->
+<div class="bg-white dark:bg-slate-900 border-2 border-primary rounded-xl p-8 flex flex-col relative shadow-2xl scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
+                    Most Popular
+                </div>
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-2">Pro</h3>
+<p class="text-slate-500 text-sm mb-6">Everything you need to scale your business.</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-primary">$29</span>
+<span class="text-slate-500 font-medium">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-sm font-semibold">
+<span class="material-symbols-outlined text-primary filled-icon text-xl">check_circle</span>
+                        Unlimited Projects
+                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold">
+<span class="material-symbols-outlined text-primary filled-icon text-xl">check_circle</span>
+                        Advanced Analytics
+                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold">
+<span class="material-symbols-outlined text-primary filled-icon text-xl">check_circle</span>
+                        24/7 Email Support
+                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold">
+<span class="material-symbols-outlined text-primary filled-icon text-xl">check_circle</span>
+                        Custom Branding
+                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold">
+<span class="material-symbols-outlined text-primary filled-icon text-xl">check_circle</span>
+                        Team Collaboration Tools
+                    </li>
+</ul>
+<button class="w-full py-4 px-4 rounded-lg font-bold text-sm bg-primary text-white hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">Upgrade Now</button>
+</div>
+<!-- Enterprise Plan -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 flex flex-col hover:shadow-xl transition-shadow">
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-2">Enterprise</h3>
+<p class="text-slate-500 text-sm mb-6">Advanced controls and enterprise-grade security.</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black">Custom</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Everything in Pro
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Priority Phone Support
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Dedicated Account Manager
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Custom Integrations &amp; API
+                    </li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        SSO &amp; Advanced Security
+                    </li>
+</ul>
+<button class="w-full py-3 px-4 rounded-lg font-bold text-sm bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Contact Sales</button>
+</div>
+</div>
+<!-- Comparison Table Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold">Compare Features</h2>
+<p class="text-slate-500 mt-2">A detailed breakdown of our capabilities</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr>
+<th class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark font-bold text-lg">Features</th>
+<th class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark font-bold text-center w-1/4">Free</th>
+<th class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark font-bold text-center w-1/4 text-primary">Pro</th>
+<th class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark font-bold text-center w-1/4">Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<!-- Group: Core -->
+<tr>
+<td class="py-4 px-4 bg-slate-100 dark:bg-slate-800/50 text-xs font-black uppercase tracking-widest text-slate-500" colspan="4">Core Management</td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Active Projects</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">3</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center font-bold">Unlimited</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center font-bold">Unlimited</td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Data Storage</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-slate-500">5GB</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-slate-500">100GB</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center font-bold">Unlimited</td>
+</tr>
+<!-- Group: Analytics -->
+<tr>
+<td class="py-4 px-4 bg-slate-100 dark:bg-slate-800/50 text-xs font-black uppercase tracking-widest text-slate-500" colspan="4">Data &amp; Insights</td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Basic Reporting</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-primary"><span class="material-symbols-outlined filled-icon">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Advanced Analytics</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-primary"><span class="material-symbols-outlined filled-icon">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Predictive Forecasting</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+<!-- Group: Support -->
+<tr>
+<td class="py-4 px-4 bg-slate-100 dark:bg-slate-800/50 text-xs font-black uppercase tracking-widest text-slate-500" colspan="4">Support &amp; Security</td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Community Forums</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-primary"><span class="material-symbols-outlined filled-icon">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">24/7 Email Support</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center text-primary"><span class="material-symbols-outlined filled-icon">check</span></td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+<tr>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 font-medium">Priority Phone Support</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center">—</td>
+<td class="py-4 px-4 border-b border-slate-200 dark:border-slate-800 text-center"><span class="material-symbols-outlined text-emerald-500">check</span></td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td class="py-10 px-4"></td>
+<td class="py-10 px-4 text-center">
+<button class="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">Get Started</button>
+</td>
+<td class="py-10 px-4 text-center">
+<button class="bg-primary text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:opacity-90 shadow-lg shadow-primary/20">Upgrade to Pro</button>
+</td>
+<td class="py-10 px-4 text-center">
+<button class="text-sm font-bold text-primary hover:underline">Contact Sales</button>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Trust Signals Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 text-center">
+<p class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-8">Trusted by over 10,000+ scaling teams worldwide</p>
+<div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all">
+<div class="flex items-center gap-2 font-black text-xl"><span class="material-symbols-outlined">rocket_launch</span> TECHNE</div>
+<div class="flex items-center gap-2 font-black text-xl"><span class="material-symbols-outlined">api</span> DEVFLOW</div>
+<div class="flex items-center gap-2 font-black text-xl"><span class="material-symbols-outlined">diamond</span> SPARK</div>
+<div class="flex items-center gap-2 font-black text-xl"><span class="material-symbols-outlined">waves</span> NEXUS</div>
+<div class="flex items-center gap-2 font-black text-xl"><span class="material-symbols-outlined">monitoring</span> DATAHUB</div>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-40">
+<h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+<div class="space-y-6">
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold text-lg mb-2">Can I switch plans later?</h4>
+<p class="text-slate-600 dark:text-slate-400">Yes, you can upgrade or downgrade your plan at any time. When you upgrade, the price change is applied immediately. Downgrades take effect at the end of your billing cycle.</p>
+</div>
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold text-lg mb-2">What happens if I exceed my project limit on Free?</h4>
+<p class="text-slate-600 dark:text-slate-400">You won't be able to create new projects until you either delete an existing one or upgrade to the Pro plan for unlimited capacity.</p>
+</div>
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold text-lg mb-2">Do you offer discounts for non-profits?</h4>
+<p class="text-slate-600 dark:text-slate-400">Absolutely! We offer a 50% discount for qualified non-profit organizations. Please reach out to our support team with your documentation.</p>
+</div>
+</div>
+</div>
+<!-- Final CTA -->
+<div class="mt-40 bg-primary/5 py-24 text-center">
+<div class="max-w-2xl mx-auto px-4">
+<h2 class="text-4xl font-black mb-6">Ready to accelerate your workflow?</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-10">Join thousands of teams already building the future with SaaS Pro.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary text-white text-lg font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-opacity shadow-xl shadow-primary/20">Get Started for Free</button>
+<button class="bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-lg font-bold px-8 py-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Book a Demo</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="text-primary">
+<svg class="w-6 h-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-lg font-bold tracking-tight">SaaS Pro</span>
+</div>
+<p class="text-sm text-slate-500 mb-6">The ultimate management platform for modern software teams.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-sm mb-6 uppercase tracking-widest text-slate-400">Product</h5>
+<ul class="space-y-4">
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Features</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Pricing</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Integrations</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Enterprise</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-sm mb-6 uppercase tracking-widest text-slate-400">Company</h5>
+<ul class="space-y-4">
+<li><a class="text-sm hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Press</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-sm mb-6 uppercase tracking-widest text-slate-400">Support</h5>
+<ul class="space-y-4">
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Security</a></li>
+<li><a class="text-sm hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500">
+            © 2024 SaaS Pro Inc. All rights reserved.
+        </div>
+</footer>
+</body></html>
