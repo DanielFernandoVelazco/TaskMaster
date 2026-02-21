@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TaskMaster - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            @apply bg-primary/10 text-primary border-r-4 border-primary;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Main Application Sidebar (Left) -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">TaskMaster</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">check_box</span>
+<span class="text-sm font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span class="text-sm font-medium">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined text-primary">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<img alt="User profile" class="w-8 h-8 rounded-full border border-slate-200" data-alt="Close up portrait of a professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-CLPCu6KNtNnBFzLCOQqB3R5EeGpqw0OJlADA4YqEJvGWAHjIbeWBd2jhzb5Ux3zDxKpixOZkR1uGS2sa0HKfsjwNIiAqLLF_OWexQQlXcdS-7JkDZIGM7kMBn1ylXq7PHenLGHq8dt2yG7Dw2VHQRp3YwQdGx4nF5vDU8xBIGhf0F1Z33EP7qLfB5n9e5xpLiBBmONCBWoxoTH3QaSKUVLXSdEgSvXrVmH3OX0HjXej0g2EyqgGcJma-rzdZa_y4fU_KqOYyvRs7"/>
+<div class="flex flex-col min-w-0">
+<span class="text-sm font-semibold truncate">Alex Johnson</span>
+<span class="text-xs text-slate-500 truncate">Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between px-8">
+<h2 class="text-lg font-semibold">Settings</h2>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90">
+                        Save Changes
+                    </button>
+</div>
+</header>
+<!-- Settings Layout Container -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-6xl mx-auto flex gap-8">
+<!-- Vertical Settings Sub-nav -->
+<aside class="w-64 flex-shrink-0">
+<nav class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<a class="flex items-center gap-3 px-4 py-4 text-primary bg-primary/5 border-r-4 border-primary transition-colors" href="#profile">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-semibold">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-4 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#notifications">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-4 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#security">
+<span class="material-symbols-outlined">security</span>
+<span class="text-sm font-medium">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-4 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#workspace">
+<span class="material-symbols-outlined">business</span>
+<span class="text-sm font-medium">Workspace</span>
+</a>
+<div class="border-t border-slate-100 dark:border-slate-800 my-2"></div>
+<a class="flex items-center gap-3 px-4 py-4 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#billing">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Billing &amp; Plan</span>
+</a>
+</nav>
+</aside>
+<!-- Settings Detail Panels -->
+<div class="flex-1 space-y-8">
+<!-- Profile Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden" id="profile">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold">Profile Information</h3>
+<p class="text-sm text-slate-500">Update your personal details and how others see you.</p>
+</div>
+<div class="p-6 space-y-6">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<img alt="Current avatar" class="w-24 h-24 rounded-full object-cover border-4 border-slate-50 dark:border-slate-800" data-alt="Avatar of a male professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpVjEJpTgvX5pYajPyXTaOrDlgvuyaaoxp8C4ZMx3Jn_RO1ZTB1OJrMJbeSMbf5OVszsPrIWIAKKsjNugdyStVJT_huUJpbwJZrhBbX25tnuMdJjjeg7RDYi5plju8FbkX5YiiqbWXKm3LE451kMXOX2_Hte39D_-0V50sDfdqE52_ZES8ZC9ueF6V_RUPWDNYPQ0C2-z5CeBdAd6NS3uHDT6Ua-M7d_hMdkTTX4pan43_y6zFMTAzgu_46w9_FYkwjkEr-oYQluPy"/>
+<button class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">photo_camera</span>
+</button>
+</div>
+<div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium">Change Photo</button>
+<p class="text-xs text-slate-500 mt-2">JPG, GIF or PNG. Max size of 800K</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="text" value="Alex Johnson"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="email" value="alex.johnson@taskmaster.com"/>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Bio</label>
+<textarea class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" placeholder="Write a short bio about yourself..." rows="3"></textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm" id="notifications">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold">Notification Preferences</h3>
+<p class="text-sm text-slate-500">Choose what you want to be notified about and where.</p>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold">Email Notifications</p>
+<p class="text-xs text-slate-500">Receive summary of activities via email</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold">Push Notifications</p>
+<p class="text-xs text-slate-500">Receive instant alerts on your desktop</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold">Weekly Reports</p>
+<p class="text-xs text-slate-500">Detailed productivity report every Monday</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm" id="security">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold">Security &amp; Password</h3>
+<p class="text-sm text-slate-500">Secure your account by managing your password and 2FA.</p>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-1 gap-4">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Current Password</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="password"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">New Password</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Confirm New Password</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="password"/>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-sm font-semibold">Two-Factor Authentication</p>
+<p class="text-xs text-slate-500">Adds an extra layer of security to your account.</p>
+</div>
+<button class="text-primary text-sm font-bold border border-primary/20 bg-primary/5 px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors">
+                                            Enable 2FA
+                                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Workspace Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm" id="workspace">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold">Workspace Settings</h3>
+<p class="text-sm text-slate-500">Manage your workspace identity and visibility.</p>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Workspace Name</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="text" value="TaskMaster Admin"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Workspace URL</label>
+<div class="flex">
+<span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 text-sm">
+                                                taskmaster.com/
+                                            </span>
+<input class="flex-1 rounded-r-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-primary focus:border-primary" type="text" value="admin-workspace"/>
+</div>
+</div>
+<div class="space-y-2 pt-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Privacy Mode</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 border-2 border-primary bg-primary/5 rounded-xl cursor-pointer">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary">public</span>
+<span class="text-sm font-bold">Public</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">Visible to anyone with the link within the organization.</p>
+</div>
+<div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:border-slate-300 transition-colors">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+<span class="text-sm font-bold">Private</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">Only invited team members can access this workspace.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-200 dark:border-red-900/30 shadow-sm mb-12">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h3 class="text-lg font-bold text-red-700 dark:text-red-400">Delete Account</h3>
+<p class="text-sm text-red-600 dark:text-red-500/80">Once you delete your account, there is no going back. Please be certain.</p>
+</div>
+<button class="bg-red-600 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-red-700 shadow-sm transition-all">
+                                    Delete Workspace
+                                </button>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Sticky Mobile Footer (if needed) or simple bottom padding -->
+<div class="h-12 flex-shrink-0"></div>
+</main>
+</div>
+</body></html>
