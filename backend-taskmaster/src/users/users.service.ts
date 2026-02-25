@@ -11,7 +11,7 @@ export class UsersService {
         @InjectModel(User.name) private userModel: Model<UserDocument>,
     ) { }
 
-    async create(email: string, password: string, name: string): Promise<User> {
+    async create(email: string, password: string, name: string): Promise<UserDocument> {
         // Verificar si el usuario ya existe
         const existingUser = await this.userModel.findOne({ email });
         if (existingUser) {
@@ -31,11 +31,11 @@ export class UsersService {
         return newUser.save();
     }
 
-    async findByEmail(email: string): Promise<User | null> {
+    async findByEmail(email: string): Promise<UserDocument | null> {
         return this.userModel.findOne({ email }).exec();
     }
 
-    async findById(id: string): Promise<User> {
+    async findById(id: string): Promise<UserDocument> {
         const user = await this.userModel.findById(id).exec();
         if (!user) {
             throw new NotFoundException('Usuario no encontrado');
@@ -43,7 +43,7 @@ export class UsersService {
         return user;
     }
 
-    async validateUser(email: string, password: string): Promise<User | null> {
+    async validateUser(email: string, password: string): Promise<UserDocument | null> {
         const user = await this.findByEmail(email);
         if (user && await bcrypt.compare(password, user.password)) {
             return user;
