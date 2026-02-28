@@ -1,5 +1,5 @@
 // src/cards/cards.controller.ts
-import { Controller, Get, Post, Body, Patch, Delete, Param, UseGuards, Request, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Delete, Param, UseGuards, Request } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CardsService } from './cards.service';
 import { CreateCardDto, UpdateCardDto, MoveCardDto, AddWatcherDto } from './dto/card.dto';
