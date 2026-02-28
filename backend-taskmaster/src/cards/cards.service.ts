@@ -78,6 +78,9 @@ export class CardsService {
         return card;
     }
 
+    // src/cards/cards.service.ts (fragmentos corregidos)
+    // ... (todo el código anterior igual hasta el método update)
+
     async update(id: string, userId: string, updateCardDto: UpdateCardDto): Promise<CardDocument> {
         await this.findOne(id, userId);
 
@@ -86,86 +89,23 @@ export class CardsService {
             updateData.assigneeId = new Types.ObjectId(updateCardDto.assigneeId);
         }
 
-        return this.cardModel
+        const updatedCard = await this.cardModel
             .findByIdAndUpdate(id, { $set: updateData }, { new: true })
             .populate('assigneeId', 'name email')
             .populate('watchers', 'name email')
             .exec();
-    }
 
-    async remove(id: string, userId: string): Promise<void> {
-        await this.findOne(id, userId);
-        await this.cardModel.findByIdAndDelete(id).exec();
-    }
-
-    async moveCard(id: string, userId: string, moveCardDto: MoveCardDto): Promise<CardDocument> {
-        const card = await this.findOne(id, userId);
-        const sourceColumnId = card.columnId.toString();
-        const targetColumnId = moveCardDto.targetColumnId;
-        const newOrder = moveCardDto.newOrder;
-
-        // Verificar acceso a la columna destino
-        await this.columnsService.findOne(targetColumnId, userId);
-
-        // Si se mueve a una columna diferente
-        if (sourceColumnId !== targetColumnId) {
-            // 1. Cerrar el hueco en la columna origen
-            await this.cardModel.updateMany(
-                {
-                    columnId: new Types.ObjectId(sourceColumnId),
-                    order: { $gt: card.order }
-                },
-                { $inc: { order: -1 } }
-            );
-
-            // 2. Hacer espacio en la columna destino
-            await this.cardModel.updateMany(
-                {
-                    columnId: new Types.ObjectId(targetColumnId),
-                    order: { $gte: newOrder }
-                },
-                { $inc: { order: 1 } }
-            );
-
-            // 3. Actualizar la tarjeta
-            card.columnId = new Types.ObjectId(targetColumnId);
-            card.order = newOrder;
-        } else {
-            // Mover dentro de la misma columna
-            if (card.order === newOrder) {
-                return card;
-            }
-
-            if (newOrder > card.order) {
-                // Mover hacia abajo
-                await this.cardModel.updateMany(
-                    {
-                        columnId: card.columnId,
-                        order: { $gt: card.order, $lte: newOrder }
-                    },
-                    { $inc: { order: -1 } }
-                );
-            } else {
-                // Mover hacia arriba
-                await this.cardModel.updateMany(
-                    {
-                        columnId: card.columnId,
-                        order: { $gte: newOrder, $lt: card.order }
-                    },
-                    { $inc: { order: 1 } }
-                );
-            }
-
-            card.order = newOrder;
+        if (!updatedCard) {
+            throw new NotFoundException('Tarjeta no encontrada después de actualizar');
         }
 
-        return card.save();
+        return updatedCard;
     }
 
     async addWatcher(id: string, userId: string, watcherId: string): Promise<CardDocument> {
         await this.findOne(id, userId);
 
-        return this.cardModel
+        const updatedCard = await this.cardModel
             .findByIdAndUpdate(
                 id,
                 { $addToSet: { watchers: new Types.ObjectId(watcherId) } },
@@ -174,12 +114,18 @@ export class CardsService {
             .populate('assigneeId', 'name email')
             .populate('watchers', 'name email')
             .exec();
+
+        if (!updatedCard) {
+            throw new NotFoundException('Tarjeta no encontrada después de agregar watcher');
+        }
+
+        return updatedCard;
     }
 
     async removeWatcher(id: string, userId: string, watcherId: string): Promise<CardDocument> {
         await this.findOne(id, userId);
 
-        return this.cardModel
+        const updatedCard = await this.cardModel
             .findByIdAndUpdate(
                 id,
                 { $pull: { watchers: new Types.ObjectId(watcherId) } },
@@ -188,12 +134,18 @@ export class CardsService {
             .populate('assigneeId', 'name email')
             .populate('watchers', 'name email')
             .exec();
+
+        if (!updatedCard) {
+            throw new NotFoundException('Tarjeta no encontrada después de remover watcher');
+        }
+
+        return updatedCard;
     }
 
     async assignCard(id: string, userId: string, assigneeId: string): Promise<CardDocument> {
         await this.findOne(id, userId);
 
-        return this.cardModel
+        const updatedCard = await this.cardModel
             .findByIdAndUpdate(
                 id,
                 { assigneeId: new Types.ObjectId(assigneeId) },
@@ -202,6 +154,12 @@ export class CardsService {
             .populate('assigneeId', 'name email')
             .populate('watchers', 'name email')
             .exec();
+
+        if (!updatedCard) {
+            throw new NotFoundException('Tarjeta no encontrada después de asignar');
+        }
+
+        return updatedCard;
     }
 
     async updateProgress(id: string, userId: string, progress: number): Promise<CardDocument> {
@@ -216,7 +174,7 @@ export class CardsService {
             status = 'in-progress';
         }
 
-        return this.cardModel
+        const updatedCard = await this.cardModel
             .findByIdAndUpdate(
                 id,
                 {
@@ -230,5 +188,11 @@ export class CardsService {
             .populate('assigneeId', 'name email')
             .populate('watchers', 'name email')
             .exec();
+
+        if (!updatedCard) {
+            throw new NotFoundException('Tarjeta no encontrada después de actualizar progreso');
+        }
+
+        return updatedCard;
     }
 }
