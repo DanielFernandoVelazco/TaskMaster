@@ -14,10 +14,8 @@ export class ColumnsService {
     ) { }
 
     async create(userId: string, createColumnDto: CreateColumnDto): Promise<ColumnDocument> {
-        // Verificar que el usuario tiene acceso al board
         await this.boardsService.findOne(createColumnDto.boardId, userId);
 
-        // Obtener el orden máximo actual para la nueva columna
         const maxOrderColumn = await this.columnModel
             .findOne({ boardId: new Types.ObjectId(createColumnDto.boardId) })
             .sort({ order: -1 })
@@ -35,7 +33,6 @@ export class ColumnsService {
     }
 
     async findAllByBoard(boardId: string, userId: string): Promise<ColumnDocument[]> {
-        // Verificar acceso al board
         await this.boardsService.findOne(boardId, userId);
 
         return this.columnModel
@@ -51,7 +48,6 @@ export class ColumnsService {
             throw new NotFoundException('Columna no encontrada');
         }
 
-        // Verificar acceso al board asociado
         await this.boardsService.findOne(column.boardId.toString(), userId);
 
         return column;
@@ -60,15 +56,24 @@ export class ColumnsService {
     async update(id: string, userId: string, updateColumnDto: UpdateColumnDto): Promise<ColumnDocument> {
         await this.findOne(id, userId);
 
-        return this.columnModel
+        const updatedColumn = await this.columnModel
             .findByIdAndUpdate(id, { $set: updateColumnDto }, { new: true })
             .exec();
+
+        if (!updatedColumn) {
+            throw new NotFoundException('Columna no encontrada después de actualizar');
+        }
+
+        return updatedColumn;
     }
 
     async remove(id: string, userId: string): Promise<void> {
         await this.findOne(id, userId);
 
-        await this.columnModel.findByIdAndDelete(id).exec();
+        const result = await this.columnModel.findByIdAndDelete(id).exec();
+        if (!result) {
+            throw new NotFoundException('Columna no encontrada para eliminar');
+        }
     }
 
     async reorderColumn(id: string, userId: string, newOrder: number): Promise<ColumnDocument> {
@@ -79,9 +84,7 @@ export class ColumnsService {
             return column;
         }
 
-        // Actualizar órdenes de otras columnas
         if (newOrder > oldOrder) {
-            // Mover hacia abajo: las columnas entre oldOrder+1 y newOrder suben
             await this.columnModel.updateMany(
                 {
                     boardId: column.boardId,
@@ -90,7 +93,6 @@ export class ColumnsService {
                 { $inc: { order: -1 } }
             );
         } else {
-            // Mover hacia arriba: las columnas entre newOrder y oldOrder-1 bajan
             await this.columnModel.updateMany(
                 {
                     boardId: column.boardId,
@@ -100,7 +102,6 @@ export class ColumnsService {
             );
         }
 
-        // Actualizar el orden de la columna movida
         column.order = newOrder;
         return column.save();
     }
