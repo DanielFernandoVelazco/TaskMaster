@@ -12,12 +12,10 @@ import { CardsModule } from './cards/cards.module';
 
 @Module({
   imports: [
-    // 1. Cargar variables de entorno
     ConfigModule.forRoot({
       envFilePath: '.env',
-      isGlobal: true, // Hace que ConfigService esté disponible globalmente
+      isGlobal: true,
     }),
-    // 2. Configurar conexión a MongoDB
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -34,4 +32,4 @@ import { CardsModule } from './cards/cards.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
