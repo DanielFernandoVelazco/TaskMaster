@@ -57,7 +57,6 @@ export const Projects: React.FC = () => {
     };
 
     const getProjectProgress = (project: Board) => {
-        // Esto vendría del backend, por ahora simulamos
         return Math.floor(Math.random() * 100);
     };
 
@@ -196,11 +195,11 @@ export const Projects: React.FC = () => {
                     );
                 })}
 
-                {/* Create Project Card */}
-                <button
+                {/* Create Project Card - Con key única */}
+                <div
                     key="create-project-card"
+                    className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px] cursor-pointer"
                     onClick={() => setShowCreateModal(true)}
-                    className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px]"
                 >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                         <span className="material-symbols-outlined text-2xl">add</span>
@@ -208,7 +207,7 @@ export const Projects: React.FC = () => {
                     <p className="text-sm font-bold text-slate-400 group-hover:text-primary transition-colors">
                         Create New Project
                     </p>
-                </button>
+                </div>
             </div>
 
             {/* Create Project Modal */}
