@@ -57,3 +57,6 @@ export interface ApiError {
     error: string;
     statusCode: number;
 }
+
+// Re-exportamos todo para asegurar disponibilidad
+export type { User as UserType, Board as BoardType, Column as ColumnType, Card as CardType };
