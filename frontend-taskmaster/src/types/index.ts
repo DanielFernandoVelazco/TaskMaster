@@ -5,6 +5,8 @@ export interface User {
     name: string;
     avatar?: string;
     role?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface AuthResponse {
@@ -48,4 +50,10 @@ export interface Card {
     coverImage?: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface ApiError {
+    message: string | string[];
+    error: string;
+    statusCode: number;
 }
