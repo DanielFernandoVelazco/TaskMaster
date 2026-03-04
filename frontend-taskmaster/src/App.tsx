@@ -8,9 +8,9 @@ import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Projects } from './pages/Projects/Projects';
+import { KanbanBoard } from './pages/Tasks/KanbanBoard';
 
 // Placeholder pages
-const Tasks = () => <div className="p-8">Tasks Page</div>;
 const Team = () => <div className="p-8">Team Page</div>;
 const Analytics = () => <div className="p-8">Analytics Page</div>;
 const Settings = () => <div className="p-8">Settings Page</div>;
@@ -54,7 +54,8 @@ function App() {
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/projects/:boardId" element={<KanbanBoard />} />
+              <Route path="/tasks" element={<Navigate to="/projects" replace />} />
               <Route path="/team" element={<Team />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
