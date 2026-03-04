@@ -57,7 +57,10 @@ export const Projects: React.FC = () => {
     };
 
     const getProjectProgress = (project: Board) => {
-        return Math.floor(Math.random() * 100);
+        // En un caso real, esto vendría de los datos del proyecto
+        // Usamos el ID como semilla simple para que no cambie en cada render
+        const seed = project.id ? project.id.length : 5;
+        return (seed * 13) % 100;
     };
 
     const getProjectStatus = (progress: number) => {
@@ -112,13 +115,15 @@ export const Projects: React.FC = () => {
 
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project) => {
+                {projects.map((project, index) => {
                     const progress = getProjectProgress(project);
                     const status = getProjectStatus(progress);
+                    // Usamos el ID del proyecto, o el índice como fallback extremo
+                    const projectKey = project.id || `project-idx-${index}`;
 
                     return (
                         <div
-                            key={project.id}
+                            key={projectKey}
                             className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all group"
                         >
                             <div className="p-6">
@@ -173,24 +178,19 @@ export const Projects: React.FC = () => {
                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${status.bgColor} ${status.textColor}`}>
                                         {status.label}
                                     </span>
+
                                     <div className="flex -space-x-2">
-                                        {/* Usamos React.Fragment para agrupar elementos con keys */}
-                                        <React.Fragment key={`${project.id}-members`}>
-                                            {[1, 2, 3].map((i) => (
-                                                <div
-                                                    key={`${project.id}-member-${i}`}
-                                                    className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-primary/10 flex items-center justify-center text-primary font-bold text-xs"
-                                                >
-                                                    {String.fromCharCode(64 + i)}
-                                                </div>
-                                            ))}
+                                        {[1, 2, 3].map((i) => (
                                             <div
-                                                key={`${project.id}-member-more`}
-                                                className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs"
+                                                key={`member-${projectKey}-${i}`}
+                                                className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-primary/10 flex items-center justify-center text-primary font-bold text-xs"
                                             >
-                                                +2
+                                                {String.fromCharCode(64 + i)}
                                             </div>
-                                        </React.Fragment>
+                                        ))}
+                                        <div className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs">
+                                            +2
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -198,9 +198,9 @@ export const Projects: React.FC = () => {
                     );
                 })}
 
-                {/* Create Project Card - Ahora como div con key */}
-                <div
-                    key="create-project-card"
+                {/* Create Project Card */}
+                <button
+                    type="button"
                     onClick={() => setShowCreateModal(true)}
                     className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px] cursor-pointer"
                 >
@@ -210,19 +210,19 @@ export const Projects: React.FC = () => {
                     <p className="text-sm font-bold text-slate-400 group-hover:text-primary transition-colors">
                         Create New Project
                     </p>
-                </div>
+                </button>
             </div>
 
             {/* Create Project Modal */}
             {showCreateModal && (
-                <div key="create-project-modal" className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full p-6 shadow-xl">
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
                             Create New Project
                         </h3>
 
                         <div className="space-y-4">
-                            <div key="project-name-field">
+                            <div>
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Project Name *
                                 </label>
@@ -236,7 +236,7 @@ export const Projects: React.FC = () => {
                                 />
                             </div>
 
-                            <div key="project-description-field">
+                            <div>
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Description
                                 </label>
@@ -249,7 +249,7 @@ export const Projects: React.FC = () => {
                                 />
                             </div>
 
-                            <div key="project-color-field">
+                            <div>
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Color Theme
                                 </label>
@@ -267,14 +267,12 @@ export const Projects: React.FC = () => {
 
                         <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
                             <button
-                                key="cancel-button"
                                 onClick={() => setShowCreateModal(false)}
                                 className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                             >
                                 Cancel
                             </button>
                             <button
-                                key="create-button"
                                 onClick={handleCreateProject}
                                 className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors"
                             >
