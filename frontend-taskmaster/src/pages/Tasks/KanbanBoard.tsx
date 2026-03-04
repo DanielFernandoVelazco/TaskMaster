@@ -8,8 +8,8 @@ import {
     PointerSensor,
     useSensor,
     useSensors,
-    DragStartEvent,
-    DragEndEvent,
+    type DragStartEvent,
+    type DragEndEvent,
 } from '@dnd-kit/core';
 import {
     SortableContext,
@@ -20,7 +20,7 @@ import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { columnsService } from '../../services/columns.service';
 import { cardsService } from '../../services/cards.service';
-import { Column as ColumnType, Card as CardType } from '../../types';
+import type { Column as ColumnType, Card as CardType } from '../../types';
 import { KanbanColumn } from './KanbanColumn';
 import { KanbanCard } from './KanbanCard';
 
@@ -304,7 +304,9 @@ export const KanbanBoard: React.FC = () => {
                     </div>
 
                     <DragOverlay>
-                        {activeCard ? <KanbanCard card={activeCard} isOverlay /> : null}
+                        {activeCard ? <KanbanCard card={activeCard} isOverlay onDelete={function (): void {
+                            throw new Error('Function not implemented.');
+                        }} /> : null}
                     </DragOverlay>
                 </DndContext>
             </div>
