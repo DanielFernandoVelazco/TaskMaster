@@ -7,9 +7,9 @@ import { MainLayout } from './layouts/MainLayout/MainLayout';
 import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { Projects } from './pages/Projects/Projects';
 
-// Placeholder pages (las crearemos después)
-const Projects = () => <div className="p-8">Projects Page</div>;
+// Placeholder pages
 const Tasks = () => <div className="p-8">Tasks Page</div>;
 const Team = () => <div className="p-8">Team Page</div>;
 const Analytics = () => <div className="p-8">Analytics Page</div>;
