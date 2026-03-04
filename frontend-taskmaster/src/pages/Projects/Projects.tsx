@@ -177,13 +177,16 @@ export const Projects: React.FC = () => {
                                     <div className="flex -space-x-2">
                                         {[1, 2, 3].map((i) => (
                                             <div
-                                                key={i}
+                                                key={`${project.id}-member-${i}`}
                                                 className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-primary/10 flex items-center justify-center text-primary font-bold text-xs"
                                             >
                                                 {String.fromCharCode(64 + i)}
                                             </div>
                                         ))}
-                                        <div className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs">
+                                        <div
+                                            key={`${project.id}-member-more`}
+                                            className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs"
+                                        >
                                             +2
                                         </div>
                                     </div>
@@ -195,6 +198,7 @@ export const Projects: React.FC = () => {
 
                 {/* Create Project Card */}
                 <button
+                    key="create-project-card"
                     onClick={() => setShowCreateModal(true)}
                     className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px]"
                 >
