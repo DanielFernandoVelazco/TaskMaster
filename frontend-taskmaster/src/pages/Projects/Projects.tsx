@@ -62,9 +62,24 @@ export const Projects: React.FC = () => {
     };
 
     const getProjectStatus = (progress: number) => {
-        if (progress >= 75) return { label: 'On Track', color: 'bg-emerald-500', textColor: 'text-emerald-700 dark:text-emerald-400', bgColor: 'bg-emerald-100 dark:bg-emerald-900/30' };
-        if (progress >= 40) return { label: 'At Risk', color: 'bg-amber-500', textColor: 'text-amber-700 dark:text-amber-400', bgColor: 'bg-amber-100 dark:bg-amber-900/30' };
-        return { label: 'Overdue', color: 'bg-rose-500', textColor: 'text-rose-700 dark:text-rose-400', bgColor: 'bg-rose-100 dark:bg-rose-900/30' };
+        if (progress >= 75) return {
+            label: 'On Track',
+            color: 'bg-emerald-500',
+            textColor: 'text-emerald-700 dark:text-emerald-400',
+            bgColor: 'bg-emerald-100 dark:bg-emerald-900/30'
+        };
+        if (progress >= 40) return {
+            label: 'At Risk',
+            color: 'bg-amber-500',
+            textColor: 'text-amber-700 dark:text-amber-400',
+            bgColor: 'bg-amber-100 dark:bg-amber-900/30'
+        };
+        return {
+            label: 'Overdue',
+            color: 'bg-rose-500',
+            textColor: 'text-rose-700 dark:text-rose-400',
+            bgColor: 'bg-rose-100 dark:bg-rose-900/30'
+        };
     };
 
     if (isLoading) {
