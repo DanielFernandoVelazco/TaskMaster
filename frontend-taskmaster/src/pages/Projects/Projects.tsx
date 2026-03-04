@@ -174,20 +174,23 @@ export const Projects: React.FC = () => {
                                         {status.label}
                                     </span>
                                     <div className="flex -space-x-2">
-                                        {[1, 2, 3].map((i) => (
+                                        {/* Usamos React.Fragment para agrupar elementos con keys */}
+                                        <React.Fragment key={`${project.id}-members`}>
+                                            {[1, 2, 3].map((i) => (
+                                                <div
+                                                    key={`${project.id}-member-${i}`}
+                                                    className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-primary/10 flex items-center justify-center text-primary font-bold text-xs"
+                                                >
+                                                    {String.fromCharCode(64 + i)}
+                                                </div>
+                                            ))}
                                             <div
-                                                key={`${project.id}-member-${i}`}
-                                                className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-primary/10 flex items-center justify-center text-primary font-bold text-xs"
+                                                key={`${project.id}-member-more`}
+                                                className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs"
                                             >
-                                                {String.fromCharCode(64 + i)}
+                                                +2
                                             </div>
-                                        ))}
-                                        <div
-                                            key={`${project.id}-member-more`}
-                                            className="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold text-xs"
-                                        >
-                                            +2
-                                        </div>
+                                        </React.Fragment>
                                     </div>
                                 </div>
                             </div>
@@ -195,11 +198,11 @@ export const Projects: React.FC = () => {
                     );
                 })}
 
-                {/* Create Project Card - Con key única */}
+                {/* Create Project Card - Ahora como div con key */}
                 <div
                     key="create-project-card"
-                    className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px] cursor-pointer"
                     onClick={() => setShowCreateModal(true)}
+                    className="bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary hover:bg-primary/5 transition-all group p-6 flex flex-col items-center justify-center gap-3 min-h-[280px] cursor-pointer"
                 >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                         <span className="material-symbols-outlined text-2xl">add</span>
@@ -212,14 +215,14 @@ export const Projects: React.FC = () => {
 
             {/* Create Project Modal */}
             {showCreateModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                <div key="create-project-modal" className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full p-6 shadow-xl">
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
                             Create New Project
                         </h3>
 
                         <div className="space-y-4">
-                            <div>
+                            <div key="project-name-field">
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Project Name *
                                 </label>
@@ -233,7 +236,7 @@ export const Projects: React.FC = () => {
                                 />
                             </div>
 
-                            <div>
+                            <div key="project-description-field">
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Description
                                 </label>
@@ -246,7 +249,7 @@ export const Projects: React.FC = () => {
                                 />
                             </div>
 
-                            <div>
+                            <div key="project-color-field">
                                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
                                     Color Theme
                                 </label>
@@ -264,12 +267,14 @@ export const Projects: React.FC = () => {
 
                         <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
                             <button
+                                key="cancel-button"
                                 onClick={() => setShowCreateModal(false)}
                                 className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                             >
                                 Cancel
                             </button>
                             <button
+                                key="create-button"
                                 onClick={handleCreateProject}
                                 className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors"
                             >
