@@ -22,16 +22,14 @@ export const Team: React.FC = () => {
         try {
             setIsLoading(true);
             // Intentamos cargar del backend, si falla usamos datos mock
-            try {
-                const data = await usersService.getTeamMembers();
-                setMembers(data);
-            } catch (error) {
-                // Si el backend no está listo, usamos datos mock
-                console.log('Usando datos mock para miembros del equipo');
-                setMembers(usersService.getMockMembers());
-            }
+            const data = await usersService.getTeamMembers();
+            setMembers(data);
+            console.log('Miembros cargados:', data.length); // Para debug
         } catch (error) {
+            console.error('Error al cargar miembros:', error);
             toast.error('Error al cargar los miembros del equipo');
+            // En caso de error, usamos mock data como fallback
+            setMembers(usersService.getMockMembers());
         } finally {
             setIsLoading(false);
         }
