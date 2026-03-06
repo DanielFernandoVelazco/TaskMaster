@@ -24,7 +24,7 @@ export const Team: React.FC = () => {
             // Intentamos cargar del backend, si falla usamos datos mock
             const data = await usersService.getTeamMembers();
             setMembers(data);
-            console.log('Miembros cargados:', data.length); // Para debug
+            console.log('Miembros cargados:', data.length);
         } catch (error) {
             console.error('Error al cargar miembros:', error);
             toast.error('Error al cargar los miembros del equipo');
@@ -47,6 +47,8 @@ export const Team: React.FC = () => {
             setShowInviteModal(false);
             setInviteEmail('');
             setInviteRole('member');
+            // Recargar miembros después de invitar
+            loadMembers();
         } catch (error) {
             toast.error('Error al enviar la invitación');
         }
@@ -100,9 +102,14 @@ export const Team: React.FC = () => {
         }
     };
 
-    const getStatusBadge = (status: string) => {
+    const getStatusBadge = (memberId: string | undefined) => {
+        // Si no hay ID, retornar un estado por defecto
+        if (!memberId) {
+            return { color: 'bg-slate-300 dark:bg-slate-600', label: 'Offline' };
+        }
+
         // Simulamos diferentes estados basados en el ID para que sea consistente
-        const seed = status.length;
+        const seed = memberId.length;
         const random = (seed * 13) % 100 / 100;
 
         if (random < 0.6) {
@@ -244,7 +251,7 @@ export const Team: React.FC = () => {
                                                 <select
                                                     value={member.role}
                                                     onChange={(e) => handleRoleChange(member.id, e.target.value)}
-                                                    className={`text-xs font-medium rounded-full px-2.5 py-0.5 border ${roleBadge.bg} ${roleBadge.text} ${roleBadge.border} focus:ring-2 focus:ring-primary/20 outline-none`}
+                                                    className={`text-xs font-medium rounded-full px-2.5 py-0.5 border ${roleBadge.bg} ${roleBadge.text} ${roleBadge.border} focus:ring-2 focus:ring-primary/20 outline-none cursor-pointer`}
                                                 >
                                                     <option value="admin">Admin</option>
                                                     <option value="member">Member</option>
@@ -262,12 +269,14 @@ export const Team: React.FC = () => {
                                                     <button
                                                         onClick={() => handleEditMember(member.id)}
                                                         className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-slate-600"
+                                                        title="Edit member"
                                                     >
                                                         <span className="material-symbols-outlined text-[20px]">edit</span>
                                                     </button>
                                                     <button
                                                         onClick={() => handleDeleteMember(member.id)}
                                                         className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-red-500"
+                                                        title="Delete member"
                                                     >
                                                         <span className="material-symbols-outlined text-[20px]">delete</span>
                                                     </button>
