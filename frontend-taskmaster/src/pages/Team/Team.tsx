@@ -10,6 +10,9 @@ export const Team: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [roleFilter, setRoleFilter] = useState('all');
     const [statusFilter, setStatusFilter] = useState('all');
+    const [showInviteModal, setShowInviteModal] = useState(false);
+    const [inviteEmail, setInviteEmail] = useState('');
+    const [inviteRole, setInviteRole] = useState('member');
 
     useEffect(() => {
         loadMembers();
@@ -18,14 +21,15 @@ export const Team: React.FC = () => {
     const loadMembers = async () => {
         try {
             setIsLoading(true);
-            // Simulamos datos por ahora, luego conectaremos con el backend real
-            const mockMembers: User[] = [
-                { id: '1', name: 'Jordan Smith', email: 'jordan@taskmaster.com', role: 'admin', avatar: '', createdAt: '', updatedAt: '' },
-                { id: '2', name: 'Elena Rodriguez', email: 'elena.r@taskmaster.com', role: 'member', avatar: '', createdAt: '', updatedAt: '' },
-                { id: '3', name: 'Marcus Chen', email: 'm.chen@taskmaster.com', role: 'viewer', avatar: '', createdAt: '', updatedAt: '' },
-                { id: '4', name: 'Sarah Connor', email: 'sarah.c@taskmaster.com', role: 'member', avatar: '', createdAt: '', updatedAt: '' },
-            ];
-            setMembers(mockMembers);
+            // Intentamos cargar del backend, si falla usamos datos mock
+            try {
+                const data = await usersService.getTeamMembers();
+                setMembers(data);
+            } catch (error) {
+                // Si el backend no está listo, usamos datos mock
+                console.log('Usando datos mock para miembros del equipo');
+                setMembers(usersService.getMockMembers());
+            }
         } catch (error) {
             toast.error('Error al cargar los miembros del equipo');
         } finally {
@@ -33,22 +37,47 @@ export const Team: React.FC = () => {
         }
     };
 
-    const handleInviteMember = () => {
-        // Implementar lógica de invitación
-        toast.success('Función de invitación próximamente');
+    const handleInviteMember = async () => {
+        if (!inviteEmail.trim()) {
+            toast.error('El email es requerido');
+            return;
+        }
+
+        try {
+            await usersService.inviteMember(inviteEmail, inviteRole);
+            toast.success(`Invitación enviada a ${inviteEmail}`);
+            setShowInviteModal(false);
+            setInviteEmail('');
+            setInviteRole('member');
+        } catch (error) {
+            toast.error('Error al enviar la invitación');
+        }
     };
 
     const handleEditMember = (memberId: string) => {
-        // Implementar edición
-        toast.success(`Editar miembro ${memberId}`);
+        toast.success(`Editar miembro ${memberId} - Funcionalidad próximamente`);
     };
 
-    const handleDeleteMember = (memberId: string) => {
+    const handleDeleteMember = async (memberId: string) => {
         if (!confirm('¿Estás seguro de eliminar este miembro del equipo?')) return;
 
-        // Implementar eliminación
-        setMembers(members.filter(m => m.id !== memberId));
-        toast.success('Miembro eliminado del equipo');
+        try {
+            await usersService.delete(memberId);
+            setMembers(members.filter(m => m.id !== memberId));
+            toast.success('Miembro eliminado del equipo');
+        } catch (error) {
+            toast.error('Error al eliminar el miembro');
+        }
+    };
+
+    const handleRoleChange = async (memberId: string, newRole: string) => {
+        try {
+            const updatedMember = await usersService.updateMemberRole(memberId, newRole);
+            setMembers(members.map(m => m.id === memberId ? updatedMember : m));
+            toast.success('Rol actualizado');
+        } catch (error) {
+            toast.error('Error al actualizar el rol');
+        }
     };
 
     const filteredMembers = members.filter(member => {
@@ -74,8 +103,10 @@ export const Team: React.FC = () => {
     };
 
     const getStatusBadge = (status: string) => {
-        // Simulamos diferentes estados
-        const random = Math.random();
+        // Simulamos diferentes estados basados en el ID para que sea consistente
+        const seed = status.length;
+        const random = (seed * 13) % 100 / 100;
+
         if (random < 0.6) {
             return { color: 'bg-emerald-500', label: 'Active' };
         } else if (random < 0.8) {
@@ -106,7 +137,7 @@ export const Team: React.FC = () => {
                     </p>
                 </div>
                 <button
-                    onClick={handleInviteMember}
+                    onClick={() => setShowInviteModal(true)}
                     className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm inline-flex items-center gap-2 transition-all shadow-sm"
                 >
                     <span className="material-symbols-outlined text-[20px]">person_add</span>
@@ -181,59 +212,73 @@ export const Team: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                            {filteredMembers.map((member) => {
-                                const roleBadge = getRoleBadge(member.role || 'member');
-                                const status = getStatusBadge(member.id);
+                            {filteredMembers.length === 0 ? (
+                                <tr>
+                                    <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
+                                        No members found
+                                    </td>
+                                </tr>
+                            ) : (
+                                filteredMembers.map((member) => {
+                                    const roleBadge = getRoleBadge(member.role || 'member');
+                                    const status = getStatusBadge(member.id);
 
-                                return (
-                                    <tr key={member.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-                                                    {member.avatar ? (
-                                                        <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-                                                    ) : (
-                                                        <span className="text-primary font-bold text-sm">
-                                                            {member.name.split(' ').map(n => n[0]).join('')}
-                                                        </span>
-                                                    )}
+                                    return (
+                                        <tr key={member.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                            <td className="px-6 py-4">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                                                        {member.avatar ? (
+                                                            <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                                                        ) : (
+                                                            <span className="text-primary font-bold text-sm">
+                                                                {member.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{member.name}</p>
+                                                        <p className="text-xs text-slate-500">{member.email}</p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{member.name}</p>
-                                                    <p className="text-xs text-slate-500">{member.email}</p>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <select
+                                                    value={member.role}
+                                                    onChange={(e) => handleRoleChange(member.id, e.target.value)}
+                                                    className={`text-xs font-medium rounded-full px-2.5 py-0.5 border ${roleBadge.bg} ${roleBadge.text} ${roleBadge.border} focus:ring-2 focus:ring-primary/20 outline-none`}
+                                                >
+                                                    <option value="admin">Admin</option>
+                                                    <option value="member">Member</option>
+                                                    <option value="viewer">Viewer</option>
+                                                </select>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="flex items-center gap-2">
+                                                    <div className={`w-2 h-2 rounded-full ${status.color}`}></div>
+                                                    <span className="text-sm text-slate-600 dark:text-slate-400">{status.label}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${roleBadge.bg} ${roleBadge.text} border ${roleBadge.border}`}>
-                                                {roleBadge.label}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center gap-2">
-                                                <div className={`w-2 h-2 rounded-full ${status.color}`}></div>
-                                                <span className="text-sm text-slate-600 dark:text-slate-400">{status.label}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleEditMember(member.id)}
-                                                    className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-slate-600"
-                                                >
-                                                    <span className="material-symbols-outlined text-[20px]">edit</span>
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDeleteMember(member.id)}
-                                                    className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-red-500"
-                                                >
-                                                    <span className="material-symbols-outlined text-[20px]">delete</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <button
+                                                        onClick={() => handleEditMember(member.id)}
+                                                        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-slate-600"
+                                                    >
+                                                        <span className="material-symbols-outlined text-[20px]">edit</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDeleteMember(member.id)}
+                                                        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors text-slate-400 hover:text-red-500"
+                                                    >
+                                                        <span className="material-symbols-outlined text-[20px]">delete</span>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -253,6 +298,67 @@ export const Team: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Invite Modal */}
+            {showInviteModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                    <div className="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full p-6 shadow-xl">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+                            Invite Team Member
+                        </h3>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                    Email Address *
+                                </label>
+                                <input
+                                    type="email"
+                                    value={inviteEmail}
+                                    onChange={(e) => setInviteEmail(e.target.value)}
+                                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="colleague@company.com"
+                                    autoFocus
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                    Role
+                                </label>
+                                <select
+                                    value={inviteRole}
+                                    onChange={(e) => setInviteRole(e.target.value)}
+                                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                >
+                                    <option value="admin">Admin</option>
+                                    <option value="member">Member</option>
+                                    <option value="viewer">Viewer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                onClick={() => {
+                                    setShowInviteModal(false);
+                                    setInviteEmail('');
+                                    setInviteRole('member');
+                                }}
+                                className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleInviteMember}
+                                className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors"
+                            >
+                                Send Invitation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Info Card */}
             <div className="mt-8 p-6 bg-primary/5 border border-primary/20 rounded-xl flex items-start gap-4">
