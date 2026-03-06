@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { MainLayout } from './layouts/MainLayout/MainLayout';
+import { Landing } from './pages/Landing/Landing';
 import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
 import { Dashboard } from './pages/Dashboard/Dashboard';
@@ -43,18 +44,20 @@ function App() {
         />
 
         <Routes>
-          {/* Rutas públicas */}
+          {/* Ruta pública principal */}
+          <Route path="/" element={<Landing />} />
+
+          {/* Rutas públicas de autenticación */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           {/* Rutas protegidas */}
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:boardId" element={<KanbanBoard />} />
-              <Route path="/tasks" element={<Tasks />} /> {/* ← Ruta corregida */}
+              <Route path="/tasks" element={<Tasks />} />
               <Route path="/team" element={<Team />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
@@ -62,7 +65,7 @@ function App() {
           </Route>
 
           {/* Ruta 404 */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
