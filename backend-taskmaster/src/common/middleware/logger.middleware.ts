@@ -1,34 +1,34 @@
 // backend-taskmaster/src/common/middleware/logger.middleware.ts
-import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-    private logger = new Logger('HTTP');
-
     use(req: Request, res: Response, next: NextFunction): void {
-        const { method, originalUrl, ip } = req;
-        const userAgent = req.get('user-agent') || '';
+        const { method, originalUrl } = req;
         const startTime = Date.now();
 
-        // Log al iniciar la petición
-        this.logger.log(`➡️  ${method} ${originalUrl} - IP: ${ip} - ${userAgent}`);
+        console.log(`\n📨 ${method} ${originalUrl} - Petición recibida`);
 
-        // Escuchar cuando la respuesta termine
-        res.on('finish', () => {
-            const { statusCode } = res;
-            const contentLength = res.get('content-length') || 0;
+        // Guardamos la función original de res.end para interceptarla
+        const originalEnd = res.end;
+        const chunk = [];
+
+        // @ts-ignore - Sobrescribimos res.end para capturar el momento en que termina
+        res.end = function (data?: any, encoding?: any, callback?: any) {
             const responseTime = Date.now() - startTime;
+            const { statusCode } = res;
 
             // Elegir emoji según el código de estado
             let statusEmoji = '✅';
             if (statusCode >= 500) statusEmoji = '❌';
             else if (statusCode >= 400) statusEmoji = '⚠️';
 
-            this.logger.log(
-                `${statusEmoji} ${method} ${originalUrl} ${statusCode} - ${responseTime}ms - ${contentLength} bytes`
-            );
-        });
+            console.log(`📬 ${method} ${originalUrl} ${statusCode} ${statusEmoji} - ${responseTime}ms\n`);
+
+            // Llamamos al método original
+            originalEnd.apply(res, arguments);
+        };
 
         next();
     }
