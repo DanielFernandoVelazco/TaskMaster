@@ -97,7 +97,7 @@ export const Tasks: React.FC = () => {
             const task = tasks.find(t => t.id === taskId);
             if (!task) return;
 
-            const updatedTask = await cardsService.update(taskId, { status: newStatus });
+            const updatedTask = await cardsService.update(taskId, { status: newStatus as 'todo' | 'in-progress' | 'review' | 'done' });
             setTasks(tasks.map(t => t.id === taskId ? updatedTask : t));
             toast.success('Estado actualizado');
         } catch (error) {
