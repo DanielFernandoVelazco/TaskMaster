@@ -142,7 +142,9 @@ export const Tasks: React.FC = () => {
                     className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                 >
                     {boards.map(board => (
-                        <option key={board.id} value={board.id}>{board.name}</option>
+                        <option key={board.id} value={board.id}> {/* ← Agregar key aquí */}
+                            {board.name}
+                        </option>
                     ))}
                 </select>
             </div>
