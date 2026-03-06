@@ -8,12 +8,11 @@ import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Projects } from './pages/Projects/Projects';
+import { Tasks } from './pages/Tasks/Tasks';
 import { KanbanBoard } from './pages/Tasks/KanbanBoard';
-import { Settings } from './pages/Settings/Settings';
+import { Team } from './pages/Team/Team';
 import { Analytics } from './pages/Analytics/Analytics';
-
-// Placeholder pages
-const Team = () => <div className="p-8">Team Page</div>;
+import { Settings } from './pages/Settings/Settings';
 
 function App() {
   return (
@@ -55,7 +54,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:boardId" element={<KanbanBoard />} />
-              <Route path="/tasks" element={<Navigate to="/projects" replace />} />
+              <Route path="/tasks" element={<Tasks />} /> {/* ← Ruta corregida */}
               <Route path="/team" element={<Team />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
