@@ -1,4 +1,4 @@
-// src/boards/schemas/board.schema.ts
+// backend-taskmaster/src/boards/schemas/board.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
@@ -18,8 +18,11 @@ export class Board {
     @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
     members: Types.ObjectId[];
 
-    @Prop({ default: '#5048e5' }) // Color primary por defecto
+    @Prop({ default: '#5048e5' })
     color: string;
+
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export const BoardSchema = SchemaFactory.createForClass(Board);
