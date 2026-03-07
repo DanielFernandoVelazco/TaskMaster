@@ -10,6 +10,7 @@ import { BoardsModule } from './boards/boards.module';
 import { ColumnsModule } from './columns/columns.module';
 import { CardsModule } from './cards/cards.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
     BoardsModule,
     ColumnsModule,
     CardsModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
