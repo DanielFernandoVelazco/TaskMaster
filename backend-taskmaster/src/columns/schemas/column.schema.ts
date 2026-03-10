@@ -1,4 +1,4 @@
-// src/columns/schemas/column.schema.ts
+// backend-taskmaster/src/columns/schemas/column.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
@@ -13,10 +13,13 @@ export class Column {
     boardId: Types.ObjectId;
 
     @Prop({ default: 0 })
-    order: number; // Para ordenar las columnas
+    order: number;
 
     @Prop({ default: null })
     color?: string;
+
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export const ColumnSchema = SchemaFactory.createForClass(Column);
