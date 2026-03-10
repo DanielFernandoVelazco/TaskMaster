@@ -1,10 +1,8 @@
-// src/users/schemas/user.schema.ts
+// backend-taskmaster/src/users/schemas/user.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-export type UserDocument = User & Document & {
-  _id: Types.ObjectId; // Asegurar que _id existe
-};
+export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
 export class User {
@@ -22,6 +20,9 @@ export class User {
 
   @Prop({ default: 'user' })
   role: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
